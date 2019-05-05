@@ -1,0 +1,25 @@
+<img class="ui tiny image"
+     *ngIf="book?.images[0]"
+     [src]="book.images[0].url">
+<div class="content">
+  <div class="header">{{ book.title }}</div>
+  <div class="description"> {{ book.subtitle }} </div>
+  <div class="metadata">
+      <span *ngFor="let author of book.authors; last as l">
+        {{ author.firstName }} {{ author.lastName }}<span *ngIf="!l">, </span>
+      </span>
+  </div>
+  <div class="extra">ISBN {{ book.isbn }}</div>
+    <div class="header"> {{ book.price | number:'1.2-5'}} €</div>
+  <br>
+    <div class="ui mini left icon input">
+      <i class="tags icon"></i>
+      <input type="number" value="{{ book.amount }}" (keyup.enter)="editAmount()" id="amount_{{book.id}}">
+    </div>
+  <br>
+  <br>
+  <button class="ui tiny red button labeled icon" (click)="removeBookFromCart(book.isbn)" ><i class="delete icon"></i>
+    Löschen</button>
+</div>
+<!--[routerLink]="['../../shoppingcart', book?.isbn]"-->
+<!--(click)="deleteBook(book?.isbn, count)"-->

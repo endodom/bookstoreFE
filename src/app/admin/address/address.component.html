@@ -1,0 +1,27 @@
+<!--<div class="content" >
+  <div class="yellow bordered" *ngIf="address.isMain != true">
+    <div class="header"></div>
+    <div class="description">Straße: {{ address.street }}</div>
+    <div class="description">Stadt: {{ address.city }}</div>
+    <div class="description">Postleitzahl: {{ address.postcode }} </div>
+
+  <!--</div>
+</div>-->
+<div class="ui list" *ngIf="address">
+  <div class="item" [ngClass]="{
+  active: isItActive()
+      }">
+  <i class="map marker icon" *ngIf="!isItMain()"></i>
+    <i class="yellow star icon" *ngIf="isItMain()"></i>
+  <div class="content">
+    <div class="header">Land: {{address.country}}</div>
+    <button class="ui right floated tiny red button labeled icon" (click)="removeAddress(address.id)" ><i class="delete icon"></i>
+      Löschen</button>
+    <div class="description">Straße: {{ address.street }}</div>
+    <div class="description">Postleitzahl: {{ address.postcode }} </div>
+    <div class="description">Stadt: {{ address.city }}</div>
+  </div>
+  <div class="extra">
+  </div>
+</div>
+</div>

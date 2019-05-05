@@ -1,0 +1,41 @@
+<div class="ui grid">
+  <div *ngIf="!orderlogs" class="ui active dimmer">
+    <div class="ui large text loader">Daten werden geladen...</div>
+  </div>
+  <div class="column row">
+    <div class="three wide column">
+      <!--platzhalter-->
+    </div>
+    <div class="ten wide column">
+<button *ngIf="authService.isBackendUser()" class="ui tiny yellow button labeled icon" [routerLink]="['../../update/', this.route.snapshot.params['id']]"><i class="write icon"></i>
+  Status updaten</button>
+    </div>
+    <div class="three wide column">
+      <!--platzhalter-->
+    </div>
+  </div>
+ <div class="column row">
+   <div class="sixteen wide column">
+    <div class="ui horizontal divider">
+      <h3>Bestellstatus-Historie</h3>
+    </div>
+   </div>
+ </div>
+  <div class="column row">
+    <div class="three wide column">
+      <!--platzhalter-->
+    </div>
+    <div class="ten wide column">
+      <div class="content" *ngIf="orderlogs">
+        <div class="ui middle aligned divided list">
+          <div *ngFor="let orderlog of orderlogs" class="item bs-orderlog-item"
+             [orderlog]="orderlog" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="three wide column">
+      <!--platzhalter-->
+    </div>
+  </div>
+</div>

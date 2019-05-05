@@ -1,0 +1,10 @@
+<div class="ui {{isLoggedIn()?'six':'four'}} item tabs inverted menu">
+  <a routerLink="home" routerLinkActive="active" class="item">Home</a>
+  <a routerLink="books" routerLinkActive="active" class="item">Bücher</a>
+  <a *ngIf="isLoggedIn()" routerLink='admin/address' routerLinkActive="active" class="item">Administration</a>
+  <a *ngIf="isLoggedIn()" routerLink="orders" routerLinkActive="active" class="item">Bestellungen</a>
+  <a routerLink="cart" routerLinkActive="active" class="item"><div class="floating ui large red circular label" style="margin: 2.7em 0em 0em -1.5em !important;" *ngIf="bs.label == true">1</div>Warenkorb</a>
+  <a routerLink="login" routerLinkActive="active" class="item">{{getLoginLabel()}}</a>
+</div>
+
+<router-outlet></router-outlet>

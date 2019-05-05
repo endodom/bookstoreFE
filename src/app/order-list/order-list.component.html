@@ -1,0 +1,72 @@
+<div *ngIf="!booksForOrder" class="ui active dimmer">
+  <div class="ui large text loader">Daten werden geladen...</div>
+</div>
+<div class="ui grid" *ngIf="booksForOrder">
+  <div class="column row">
+    <div class="sixteen wide column">
+      <div class="ui horizontal divider">
+        <h3>Die Übersicht ihres Warenkorb</h3>
+      </div>
+    </div>
+  </div>
+  <div class="column row">
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+      <div class="seven wide column">
+        <div class="ui middle aligned selection divided list">
+          <a *ngFor="let book of booksForOrder" class="item bs-order-list-item"
+             [book]="book">
+          </a>
+        </div>
+      </div>
+      <div class="three wide right aligned column" *ngIf="authService.isLoggedIn()">
+        <div class="ui horizontal divider">
+          <h4>Lieferadresse</h4>
+        </div>
+        <table class="ui grey large table">
+          <thead>
+          <tr>
+            <th class="right aligned">{{address.country}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="right aligned">{{address.street}}</td>
+          </tr>
+          <tr>
+            <td class="right aligned">{{address.postcode}}</td>
+          </tr>
+          <tr>
+            <td class="right aligned">{{address.city}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="three wide column">
+      <!--platzhalter-->
+      </div>
+  </div>
+  <div class="ui horizontal divider">
+    <h3> - </h3>
+  </div>
+    <div class=" column row">
+      <div class="ten wide column">
+        <!--platzhalter-->
+      </div>
+        <div class="three wide right aligned column">
+          <h3 class="right aligned" *ngIf="authService.isLoggedIn()">Gesamt: {{ booksForOrder["sum"] | number:'1.2-5' }} € <h5 style="color: grey"><i>inkl. {{address.taxPercentage * 100}} % Steuern </i></h5></h3>
+          <h3 class="right aligned" *ngIf="!authService.isLoggedIn()">Gesamt: {{ booksForOrder["sum"] | number:'1.2-5' }} € <h5 style="color: grey"><i>inkl. 10 % Steuern </i></h5></h3>
+          <button class="ui tiny green button labeled icon" [routerLink]="['../books']"><i class="search icon"></i> <!---->
+            Weiterstöbern</button>
+          <button *ngIf="authService.isLoggedIn()" class="ui tiny yellow button labeled icon" (click)="orderIt()"><i class="cart icon"></i>
+            Bestellen </button><!--[routerLink]="['../../books']"-->
+        </div>
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+    </div>
+</div>
+
+
+

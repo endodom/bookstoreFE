@@ -1,0 +1,98 @@
+<div *ngIf="!addresses" class="ui active dimmer">
+  <div class="ui large text loader">Daten werden geladen...</div>
+</div>
+<div class="ui grid" *ngIf="addresses" >
+  <div class="column row" *ngIf="!authService.isBackendUser()">
+    <div class="sixteen wide column">
+      <div class="ui horizontal divider">
+        <h3>Verwalten Sie ihre Daten</h3>
+      </div>
+    </div>
+  </div>
+  <div class="column row" >
+    <div class="three wide column">
+      <!-- Platzhalter -->
+    </div>
+    <div class="five wide aligned column" *ngIf="!authService.isBackendUser()">
+      <!-- Addressauflistung -->
+      <h3 class="ui dividing header">Bestehende Adressen</h3>
+      <div class="ui middle aligned selection divided list" *ngIf="isOverview(param.id)">
+        <a *ngFor="let address of addresses" class="item bs-address"
+           [address]="address" [routerLink]="['update/', address.id]">
+        </a>
+      </div>
+      <div class="ui middle aligned selection divided list" *ngIf="!isOverview(param.id)">
+        <a *ngFor="let address of addresses" class="item bs-address"
+           [address]="address" [routerLink]="['../', address.id]" (click)="window.location.reload()">
+        </a>
+      </div>
+      </div>
+    <!-- Adressenformular -->
+    <div class="five wide column">
+      <form class="ui form" [formGroup]="addressForm" (ngSubmit)="submitForm()" *ngIf="!authService.isBackendUser()">
+        <h3 class="ui dividing header">Neue Adresse anlegen</h3>
+        <div class="two fields">
+            <div class="ten wide field">
+              <label>Addresse</label>
+              <input type="text" formControlName="street" id="street" placeholder="Straße">
+            </div>
+            <div class="six wide field">
+              <label>Stadt</label>
+              <input type="text" formControlName="city" id="city" placeholder="Stadt">
+            </div>
+        </div>
+        <div class="two fields">
+          <div class="field">
+            <label>Postleitzahl</label>
+            <input type="number" formControlName="postcode" id="postcode" placeholder="Stadt">
+          </div>
+          <div class="field">
+          <label>Land</label>
+            <select class="ui dropdown" id="country" formControlName="country">
+              <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <div class="six wide field">
+              <label>Hauptadresse?</label>
+              <input type="number" formControlName="isMain" id="isMain" placeholder="(1 JA | 0 NEIN)">
+          </div>
+          <div class="six wide column">
+          </div>
+          <div class="two fields">
+            <div class="sixteen wide field">
+              <!-- Platzhalter -->
+            </div>
+            <div class="four wide right aligned field">
+              <button type="submit" class="ui button" [disabled]="addressForm.invalid">Speichern</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- Ende des Adressenformulars -->
+    </div>
+    <div class="three wide column">
+      <!-- Platzhalter -->
+    </div>
+  </div>
+  <div class="column row" *ngIf="authService.isBackendUser()">
+    <div class="five wide column">
+      <!-- Platzhalter -->
+    </div>
+    <div class="six wide column">
+    <h3 class="ui dividing header" *ngIf="authService.isBackendUser()">Verwaltung der Bücher</h3>
+    <div class="ui grid">
+      <div class="eight wide column">
+        <button class="ui tiny yellow button labeled icon" ><i class="write icon"></i>Bücher verwalten</button>
+      </div>
+      <div class="eight wide right aligned column">
+        <button class="ui tiny green button labeled icon" [routerLink]="['../bookForm']"><i class="plus icon"></i>Buch anlegen</button>
+      </div>
+    </div>
+    </div>
+    <div class="five wide column">
+      <!-- Platzhalter -->
+    </div>
+  </div>
+</div>

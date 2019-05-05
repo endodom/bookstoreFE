@@ -1,0 +1,79 @@
+<div class="ui grid">
+  <div *ngIf="!orders" class="ui active dimmer">
+    <div class="ui large text loader">Daten werden geladen...</div>
+  </div>
+  <div class="column row">
+    <div class="three wide column">
+      <!--platzhalter-->
+    </div>
+    <div class="ten wide column">
+      <div class="ui grid">
+        <div class="column row" *ngIf="authService.isBackendUser()">
+          <div class="four wide column">
+          <span>Filtern: </span>
+            <button class="ui icon button" (click)="sortDesc()">
+              <i class="arrow alternate circle down icon"></i>
+            </button>
+            <button class="ui icon button" (click)="sortAsc()">
+              <i class="arrow alternate circle up icon"></i>
+            </button>
+          </div>
+            <div class="four wide column">
+              <!--Platzhalter -->
+            </div>
+          <div class="eight wide column">
+            <div class="ui compact menu" *ngIf="authService.isBackendUser()">
+              <div class="ui simple dropdown item">
+                Nach Status:
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item" id="0" (click)="sortByStatus(0)">Eingegangen</div>
+                  <div class="item" id="1" (click)="sortByStatus(1)">in Bearbeitung</div>
+                  <div class="item" id="2" (click)="sortByStatus(2)">Versandt</div>
+                  <div class="item" id="3" (click)="sortByStatus(3)">Zugestellt</div>
+                  <div class="item" id="4" (click)="sortByStatus(4)">Zurückgesandt</div>
+                  <div class="item" id="-1" (click)="sortByStatus(-1)">Stoniert</div>
+                </div>
+              </div>
+            </div>
+            <div class="ui right alinged left icon input" *ngIf="authService.isBackendUser()">
+              <input type="number" id="userID" (keyup.enter)="getOrderByUserId()" placeholder="filtern nach UserID..." value="1">
+              <i class="users icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+  </div> <!-- End Row -->
+    <div class="column row">
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+      <div class="ten wide column">
+        <div class="ui horizontal divider">
+          <h3>Übersicht <span *ngIf="authService.isBackendUser()">aller</span><span *ngIf="!authService.isBackendUser()">ihrer</span> Bestellungen</h3>
+        </div>
+      </div>
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+    </div>
+    <div class="column row">
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+      <div class="ten wide column">
+        <div class="ui middle aligned selection divided list">
+          <a *ngFor="let order of orders" class="item bs-order-overview-item"
+             [order]="order" [routerLink]="order.id">
+          </a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <!--platzhalter-->
+      </div>
+    </div>
+</div>

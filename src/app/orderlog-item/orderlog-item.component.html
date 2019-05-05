@@ -1,0 +1,19 @@
+<br>
+<div class="ui grid middle aligned">
+  <div class="column row">
+    <div class="two wide column">
+      <img class="ui small circular image bordered" [src]="bs.getImage(orderlog.status)">
+    </div>
+    <div class="twelve wide column">
+      <div class="header">Aktualisiert am: {{ orderlog.updated_at }} </div>
+      <div class="metadata">
+        Kundennotiz: {{orderlog.note}}
+      </div>
+      <div class="metadata" *ngIf="authService.isBackendUser()">
+        Adminnotiz: {{orderlog.adminNote}}
+      </div>
+      <div class="header">Status: {{ orderlog.status }} </div>
+    </div>
+  </div>
+</div>
+<br>

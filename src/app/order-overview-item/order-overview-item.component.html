@@ -1,0 +1,95 @@
+<div class="ui grid" *ngIf="order">
+    <div class="column row">
+    <!--<div class=""-->
+      <div class="ui four top attached small steps">
+        <div [ngClass]="{
+        completed: !stepOne(),
+        active: stepOne()
+            }" class="step">
+          <i class="payment icon" *ngIf="!stepOne()"></i>
+          <img class="ui tiny image" [src]="bs.getImage(orderStatus[0])" *ngIf="stepOne()">
+          <div class="content">
+            <div class="title">Bestellungseingang</div>
+            <div class="description">Choose your </div>
+          </div>
+        </div>
+        <div [ngClass]="{
+        completed: !stepTwo() && !stepOne(),
+        active: stepTwo()
+            }" class="step">
+          <i class="payment icon" *ngIf="!stepTwo() && !stepOne()"></i>
+          <img class="ui tiny spaced image" [src]="bs.getImage(orderStatus[1])" *ngIf="stepTwo() || stepOne()">
+          <div class="content">
+            <div class="title">Bearbeitung</div>
+            <div class="description">Choose your </div>
+          </div>
+        </div>
+        <div [ngClass]="{
+        completed: !stepTwo() && !stepOne() && !stepThree(),
+        active: stepThree()
+            }" class="step">
+          <i class="payment icon" *ngIf="!stepTwo() && !stepOne() && !stepThree()"></i>
+          <img class="ui tiny spaced image" [src]="bs.getImage(orderStatus[2])" *ngIf="stepThree() || stepOne() || stepTwo()">
+          <div class="content">
+            <div class="title">Versandt</div>
+          </div>
+        </div>
+        <div [ngClass]="{
+        completed: stepFour()
+            }" class="step">
+          <i class="payment icon" *ngIf="stepFour()"></i>
+          <img class="ui tiny spaced image" [src]="bs.getImage(orderStatus[3])" *ngIf="!stepFour()">
+          <div class="content">
+            <div class="title">Zugestellt</div>
+          </div>
+        </div>
+        <div [ngClass]="{
+        active: returnedOrder()
+            }" class="step" *ngIf="returnedOrder()">
+          <img class="ui tiny spaced image" [src]="bs.getImage(orderStatus[4])" *ngIf="returnedOrder()">
+          <div class="content">
+            <div class="title">Zurückgesandt</div>
+          </div>
+        </div>
+        <div [ngClass]="{
+        active: cancelledOrder()
+            }" class="step" *ngIf="cancelledOrder()">
+          <img class="ui tiny spaced image" [src]="bs.getImage(orderStatus[-1])" *ngIf="cancelledOrder()">
+          <div class="content">
+            <div class="title">Stoniert</div>
+          </div>
+        </div>
+      </div><!-- steps end -->
+        <div class="ui attached segment">
+          <div class="ui grid">
+            <div class="column inverted row">
+              <div class="four wide column">
+                <div class="header">BestellID: {{order.id}}</div>
+              </div>
+              <div class="four wide column">
+                <div class="metadata">vom {{date}}</div>
+              </div>
+              <div class="four wide column">
+                <div class="description">Gesamtpreis: {{ order.grossAmount }} €</div>
+              </div>
+              <div class="four wide column">
+                <div class="description"> {{ order.addressId }} </div>
+              </div>
+            </div>
+
+            <div class="column row">
+              <!--<img class="ui large rounded bordered image" *ngIf="book.images && book.images[0]"
+                   [src]="book.images[0].url">-->
+              <div class="metadata">
+                <span><h3>Bücher: </h3><br></span>
+                <span class="description" *ngFor="let book of order.books; last as l">
+                  <div>{{ book.title }}, {{ book.subtitle }} - {{ book.price }}</div>
+                <span *ngIf="!l">, </span>
+                </span>
+              </div>
+            </div>
+
+          </div><!-- second ui grid ends -->
+        </div>
+    </div>
+</div>

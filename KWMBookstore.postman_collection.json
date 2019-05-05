@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "dfbf93e3-5b3c-48ea-8458-76f8f424891d",
+		"name": "KWMBookstore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rest list all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://bookstore19.s1610456009.student.kwmhgb.at/api/books",
+					"protocol": "http",
+					"host": [
+						"bookstore19",
+						"s1610456009",
+						"student",
+						"kwmhgb",
+						"at"
+					],
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST list book 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://bookstore19.s1610456009.student.kwmhgb.at/api/book/1234561235",
+					"protocol": "http",
+					"host": [
+						"bookstore19",
+						"s1610456009",
+						"student",
+						"kwmhgb",
+						"at"
+					],
+					"path": [
+						"api",
+						"book",
+						"1234561235"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST checkISBN ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://bookstore19.s1610456009.student.kwmhgb.at/api/book/checkisbn/1234561235",
+					"protocol": "http",
+					"host": [
+						"bookstore19",
+						"s1610456009",
+						"student",
+						"kwmhgb",
+						"at"
+					],
+					"path": [
+						"api",
+						"book",
+						"checkisbn",
+						"1234561235"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://bookstore19.s1610456009.student.kwmhgb.at/api/books/search/Gusenbauer",
+					"protocol": "http",
+					"host": [
+						"bookstore19",
+						"s1610456009",
+						"student",
+						"kwmhgb",
+						"at"
+					],
+					"path": [
+						"api",
+						"books",
+						"search",
+						"Gusenbauer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REST save book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"isbn\": \"12345612356999\",\n    \"title\": \"Harry Potter & Domenic\",\n    \"subtitle\": \"Und ein Stein\",\n    \"published\": \"2019-03-11 09:02:34\",\n    \"rating\": 10,\n    \"description\": \"Cool\",\n    \"user_id\": 1,\n    \"created_at\": \"2019-03-11 09:02:34\",\n    \"updated_at\": \"2019-03-11 09:02:34\",\n    \"authors\": [],\n    \"images\": []\n}"
+				},
+				"url": {
+					"raw": "http://bookstore19.s1610456009.student.kwmhgb.at/api/book",
+					"protocol": "http",
+					"host": [
+						"bookstore19",
+						"s1610456009",
+						"student",
+						"kwmhgb",
+						"at"
+					],
+					"path": [
+						"api",
+						"book"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

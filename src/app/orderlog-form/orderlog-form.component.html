@@ -1,0 +1,32 @@
+<div class="ui grid">
+  <div class="four column row">
+    <div class="four wide column">
+
+    </div>
+    <div class="eight wide column">
+      <h1>Bestellstatus updaten</h1>
+      <form class="ui large form" [formGroup]="orderlogForm" (ngSubmit)="submitForm()">
+        <input type="hidden" name="id">
+        <div class="field four wide column">
+          <label>Neuer Status</label>
+          <select class="ui dropdown" id="status" formControlName="status">
+            <option *ngFor="let state of statusForm" [value]="state.id">{{state.name}}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Kundennotiz</label>
+          <textarea formControlName="note" rows="3"></textarea>
+        </div>
+        <div class="field" >
+          <label>Adminnotiz</label>
+          <textarea formControlName="adminNote" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="ui button" [disabled]="orderlogForm.invalid">Speichern</button>
+      </form>
+    </div>
+    <div class="four wide column">
+
+    </div>
+  </div>
+</div>
