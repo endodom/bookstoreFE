@@ -5,6 +5,7 @@ import * as decode from 'jwt-decode';
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import {repeat} from "rxjs/internal/operators";
+import {BookStoreService} from "./book-store.service";
 
 //npm install --save-dev jwt-decode
 
@@ -25,13 +26,14 @@ interface User {
 @Injectable()
 export class AuthService {
     //über dependency injection instanz von client geholt
+    @Input()
     private user : User;
     private repeat : boolean;
 
     private api = 'http://bookstore19.s1610456009.student.kwmhgb.at/api/auth';
 
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private bs: BookStoreService) {
     }
 
     //wir schicken in payload als json mit
@@ -49,6 +51,9 @@ export class AuthService {
         //Benutzer in local storage speichern
         this.http.get<User>(`${this.api}/user`).pipe(retry(3)).subscribe(res => {
             this.user = res;
+            this.bs.getMainAddress(res.result.id).subscribe(res => {
+                localStorage.setItem('tax', res[0].taxPercentage.toString());
+            });
             localStorage.setItem('userId', res.result.id.toString());
             localStorage.setItem('role', res.result.role.toString());
             //console.log("give user in authservice");

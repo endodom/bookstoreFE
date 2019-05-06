@@ -17,6 +17,7 @@ export class BookDetailsComponent implements OnInit {
 
   @Input() book : Book;
   address : Address;
+  tax: Number;
 
   constructor(
       private bs: BookStoreService,
@@ -28,6 +29,7 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit() {
     const params = this.route.snapshot.params;
+    this.tax = Number(localStorage.getItem('tax'));
 
 
     if (!isNullOrUndefined(localStorage.getItem('userId'))){
@@ -39,7 +41,7 @@ export class BookDetailsComponent implements OnInit {
 
         this.bs.getSingle(params['isbn']).subscribe(res => {
             this.book = res;
-            let percentage = Number(this.address.taxPercentage);
+            let percentage = Number(this.tax);
             let netPrice = Number(0);
             let priceVal = Number(0);
             let sum = Number(0);

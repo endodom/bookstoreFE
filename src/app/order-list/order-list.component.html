@@ -24,7 +24,7 @@
         <div class="ui horizontal divider">
           <h4>Lieferadresse</h4>
         </div>
-        <table class="ui grey large table">
+        <table class="ui grey large table" >
           <thead>
           <tr>
             <th class="right aligned">{{address.country}}</th>
@@ -55,7 +55,7 @@
         <!--platzhalter-->
       </div>
         <div class="three wide right aligned column">
-          <h3 class="right aligned" *ngIf="authService.isLoggedIn()">Gesamt: {{ booksForOrder["sum"] | number:'1.2-5' }} € <h5 style="color: grey"><i>inkl. {{address.taxPercentage * 100}} % Steuern </i></h5></h3>
+          <h3 class="right aligned" *ngIf="authService.isLoggedIn() && tax">Gesamt: {{ booksForOrder["sum"] | number:'1.2-5' }} € <h5 style="color: grey"><i>inkl. {{tax * 100}} % Steuern </i></h5></h3>
           <h3 class="right aligned" *ngIf="!authService.isLoggedIn()">Gesamt: {{ booksForOrder["sum"] | number:'1.2-5' }} € <h5 style="color: grey"><i>inkl. 10 % Steuern </i></h5></h3>
           <button class="ui tiny green button labeled icon" [routerLink]="['../books']"><i class="search icon"></i> <!---->
             Weiterstöbern</button>

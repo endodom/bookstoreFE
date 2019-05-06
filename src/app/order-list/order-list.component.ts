@@ -24,6 +24,7 @@ export class OrderListComponent implements OnInit {
   private booksForOrder = [];
   private order : Order;
   private address : Address;
+  private tax : Number;
 
 
 
@@ -33,14 +34,22 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit() {
       this.bs.unsetLabel();
+      this.tax = Number(localStorage.getItem('tax'));
 
       if(!isNullOrUndefined(localStorage.getItem('userId'))){
+
+          this.bs.getAllAddresses(Number(localStorage.getItem('userId'))).subscribe(res => {
+              let index = res.findIndex(i => i.isMain == true);
+              this.address = res[index];
+              this.getBook();
+          });
+
+          /*
           this.bs.getMainAddress(this.authService.getCurrentUser()).subscribe(res => {
               this.address = res[0];
-              this.address.taxPercentage = Number(this.address.taxPercentage);
+              console.log(res[0]);
               this.getBook();
-
-          });
+          });*/
       }
       else {
           const cart = JSON.parse(localStorage.getItem('cart'));
@@ -52,7 +61,8 @@ export class OrderListComponent implements OnInit {
                   this.bs.getSingle(isbn).subscribe(result => {
                       result.amount = cart[i].count;
                       result.price *= cart[i].count;
-                      let percentage = Number(0.10);
+                      this.tax = Number(0.10);
+                      let percentage = Number(this.tax);
                       let netPrice = Number(0);
                       let priceVal = Number(0);
                       let sum = Number(0);
@@ -80,7 +90,7 @@ export class OrderListComponent implements OnInit {
                 this.bs.getSingle(isbn).subscribe(result => {
                     result.amount = cart[i].count;
                     result.price *= cart[i].count;
-                    let percentage = Number(this.address.taxPercentage);
+                    let percentage = Number(this.tax);
                     let netPrice = Number(0);
                     let priceVal = Number(0);
                     let sum = Number(0);

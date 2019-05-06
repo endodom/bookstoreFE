@@ -15,20 +15,25 @@ export class BookListComponent implements OnInit {
 
     books : Book[];
     address : Address;
+    tax : Number;
 
     constructor (private bs : BookStoreService) {}
 
     ngOnInit() {
         if(!isNullOrUndefined(localStorage.getItem('userId'))){
             const userId = parseInt(localStorage.getItem('userId'));
+            this.tax = Number(localStorage.getItem('tax'));
 
-            this.bs.getMainAddress(userId).subscribe(res => {
-                this.address = res[0];
+            this.bs.getAllAddresses(Number(localStorage.getItem('userId'))).subscribe(res => {
+                let index = res.findIndex(i => i.isMain == true);
+                this.address = res[index];
             });
+
+
 
             this.bs.getAll().subscribe(res => {
                 this.books = res;
-                let percentage = Number(this.address.taxPercentage);
+                let percentage = Number(this.tax);
                 let netPrice = Number(0);
                 let priceVal = Number(0);
                 let sum = Number(0);
